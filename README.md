@@ -10,6 +10,15 @@ To develop a web-based AR application that revolutionizes e-commerce advertising
 - **AR Platform:** AR.js with A-Frame (web-based AR)
 - **Social Media APIs:** Facebook/Instagram API (considering TikTok or other e-commerce platforms for integration)
 
+## Technical Details
+The application will be developed using AR.js and A-Frame for AR functionality, with 3D models created in Unity (may change because it's weird on my computer). Social media integration will be done using the above APIs, allowing for sharing across users and platforms. Depending on progress, I may build a backend based on Node.js and MongoDB, which can manage user data for metrics/analysis.
+
+## User Experience
+Users initiate the AR experience by clicking a link. They can then interact with virtual products, exploring features and customization options. After the interaction, users are prompted to share their experience on social media, further enhancing brand exposure and engagement. I may also track other metrics that measure engagement, such as time spent looking on a page, clicks or rotations of a model, and 
+
+## User Study
+TBD
+
 ## Sources/Citations
 - Rauschnabel, P. A., & Javornik, A. (2016). Augmented reality marketing: How mobile AR-apps can improve brands through inspiration. In Augmented Reality for Marketing (pp. 219-233). Springer, Cham.
 - Javornik, A. (2016). Exploring the Use of Augmented Reality for Brand Experiences. Computers in Human Behavior.
