@@ -55,3 +55,7 @@ Depending on the progress of the project, a user study may be conducted to evalu
 - Javornik, A. (2016). Exploring the Use of Augmented Reality for Brand Experiences. Computers in Human Behavior.
 - Sung, E. (2020). The effects of augmented reality mobile app advertising: Viral marketing via shared social experience. Journal of Business Research, 117, 196-206.
 - Alamäki, A., Dirin, A., & Suomala, J. (2019). Students' expectations and social media sharing in adopting augmented reality. International Journal of Information and Learning Technology, 36(3), 202-216.
+
+
+# Troubles so far
+Want to compare it to existing. Tried 8th wall, however, can only work on an online code editor. If I want the key, must pay for pro or enterprise version. Now trying WebXR
