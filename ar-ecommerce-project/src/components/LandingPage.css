@@ -1,0 +1,39 @@
+.landing-container {
+    text-align: center;
+  }
+  
+  .hero-section {
+    background-image: url('images/background.avif'); /* Replace with your image path */
+    background-size: cover;
+    padding: 100px 50px;
+    color: white;
+  }
+  
+  .cta-button {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .featured {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px;
+  }
+  
+  .product-card {
+    width: 200px; /* Adjust as needed */
+    text-align: left;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Add more styles as required */
+  
