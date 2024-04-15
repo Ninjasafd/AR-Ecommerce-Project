@@ -3,7 +3,7 @@
   }
   
   .hero-section {
-    background-image: url('images/background.avif'); /* Replace with your image path */
+    background-image: url('images/background.jpg'); 
     background-size: cover;
     padding: 100px 50px;
     color: white;
