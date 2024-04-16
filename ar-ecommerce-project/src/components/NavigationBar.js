@@ -5,7 +5,8 @@ function NavigationBar() {
   return (
     <nav className="bg-gray-800 p-4 text-center">
       <Link to="/" className="text-white mr-6">Home</Link>
-      <Link to="/ar-scene" className="text-white">Enter AR Experience</Link>
+      <Link to="/ar-scene" className="text-white mr-6">Enter AR Experience</Link>
+      <Link to="/about" className="text-white">About</Link>
     </nav>
   );
 }

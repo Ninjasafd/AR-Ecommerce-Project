@@ -4,6 +4,14 @@ import ProductCard from './ProductCard';
 import './LandingPage.css';
 
 const LandingPage = () => {
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // for smooth scrolling
+        });
+    };
+
     // Array of products to be displayed
     const products = [
         {
@@ -21,7 +29,7 @@ const LandingPage = () => {
     ];
 
     return (
-        <div className="landing-container">
+        <div className="landing-container ">
             <header className="hero-section">
                 <h1 className="text-4xl font-bold">Welcome to Jeffrey's E-commerce AR Website!</h1>
                 <p className="text-xl mt-4">Check out some of the products below!</p>
@@ -40,9 +48,13 @@ const LandingPage = () => {
                     />
                 ))}
             </section>
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer">
-                <Link to="/ar-scene">Enter AR Experience</Link>
+
+            <button
+                onClick={scrollToTop}
+                className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer fixed bottom-4 right-4 shadow transition duration-300 ease-in-out hover:shadow-lg">
+                ↑ Top
             </button>
+
         </div>
     );
 };
