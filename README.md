@@ -60,6 +60,11 @@ Depending on the progress of the project, a user study may be conducted to evalu
 
 ## Challenges
 
+### Demo Video
+[![Demo Video](http://img.youtube.com/vi/5bS152d1niU/0.jpg
+)](https://www.youtube.com/watch?v=5bS152d1niU)
+
+
 ### Markerless Environment Compatibility
 Finding a suitable markerless environment for the AR application has been challenging. My current library, `AR.js` seems to have some issue with such markerless augmented scenes. I've explored a few options and encountered some limitations:
 
