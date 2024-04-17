@@ -56,6 +56,30 @@ Depending on the progress of the project, a user study may be conducted to evalu
 - Sung, E. (2020). The effects of augmented reality mobile app advertising: Viral marketing via shared social experience. Journal of Business Research, 117, 196-206.
 - Alamäki, A., Dirin, A., & Suomala, J. (2019). Students' expectations and social media sharing in adopting augmented reality. International Journal of Information and Learning Technology, 36(3), 202-216.
 
+# Part 2: Milestone
 
-# Troubles so far
-Want to compare it to existing. Tried 8th wall, however, can only work on an online code editor. If I want the key, must pay for pro or enterprise version. Now trying WebXR
+## Challenges
+
+### Markerless Environment Compatibility
+Finding a suitable markerless environment for the AR application has been challenging. My current library, `AR.js` seems to have some issue with such markerless augmented scenes. I've explored a few options and encountered some limitations:
+
+- **8th Wall:** Initially, I found 8th Wall, which provides markerless AR solutions. However, the free version only allows usage within an online code editor. To access advanced features like the API key, a subscription to the pro or enterprise version is required, which is too much this early into the project.
+
+- **SparkAR:** I also took a look at SparkAR, but it seemed mostly for creating AR effects for Facebook and Instagram. However, it doesn't seem very comptabile with web integrations, so I decided to look at other solutions.
+
+- **WebXR:** Currently, I am looking at exploring WebXR as an alternative. WebXR is a standard that enables AR and VR experiences on the web without the need for plugins. We're still evaluating its compatibility and features to determine if it's the right choice for our AR application.
+
+
+I'll continue to update this section as I make progress.
+
+## Next steps
+
+1. **Markerless AR:** Research and implement a markerless AR solution that is compatible with the website. This involves exploring libraries or frameworks like WebXR or similar technologies.
+
+2. **User-Generated 3D Models:** Develop a system that allows users to develop or add their own 3D models to the AR environment. This includes a user interface for uploading, editing, and placing 3D models in the AR space.
+
+3. **Social Media Sharing:** Integrate social media sharing functionality into the AR application. This involves adding buttons or links that allow users to easily share their AR experiences on platforms like Facebook, Instagram, or Twitter.
+
+4. **Feedback and Improvement:** Finally, gather feedback from users and use it to improve the AR application. This involves maintenance such as fixing bugs, adding new features, or making other enhancements based on user input.
+
+Doesn't seem like I have to change the scope of the project yet, however, that may change depending on if I find a compatible markerless AR resource.
