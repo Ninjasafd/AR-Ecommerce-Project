@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+// import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import './LandingPage.css';
 
@@ -8,23 +8,40 @@ const LandingPage = () => {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth' // for smooth scrolling
+            behavior: 'smooth' 
         });
     };
 
-    // Array of products to be displayed
     const products = [
         {
             imageSrc: 'https://media.istockphoto.com/id/1368342833/photo/end-table-round-coffee-table-isolated-on-white.jpg?s=612x612&w=0&k=20&c=pOOmk6eyEfiv1x8toQkPWjDmTfBYJ9y5y2RTIaEBeGU=',
             title: 'End Table',
             description: 'Elegant end table, perfect for any setting.',
-            link: 'https://www.example.com/end-table'
+            link: '/ar-scene'
         },
         {
             imageSrc: 'https://www.ikea.com/us/en/images/products/stefan-chair-brown-black__0727320_pe735593_s5.jpg?f=s',
             title: 'STEFAN Chair',
             description: 'Classic design with a solid wood construction.',
-            link: 'https://www.ikea.com/us/en/p/stefan-chair-brown-black-00211088/'
+            link: '/ar-scene'
+        },
+        {
+            imageSrc: 'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4425e81a-baa8-4b61-a057-45ae5c62db4c/2686d731-7c97-4966-ae36-1a27c9a0f9a8.png',
+            title: 'PLACEHOLDER',
+            description: 'This is a placeholder for a product.',
+            link: '/ar-scene'
+        },
+        {
+            imageSrc: 'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4425e81a-baa8-4b61-a057-45ae5c62db4c/2686d731-7c97-4966-ae36-1a27c9a0f9a8.png',
+            title: 'PLACEHOLDER',
+            description: 'This is a placeholder for a product.',
+            link: '/ar-scene'
+        },
+        {
+            imageSrc: 'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4425e81a-baa8-4b61-a057-45ae5c62db4c/2686d731-7c97-4966-ae36-1a27c9a0f9a8.png',
+            title: 'PLACEHOLDER',
+            description: 'This is a placeholder for a product.',
+            link: '/ar-scene'
         },
     ];
 

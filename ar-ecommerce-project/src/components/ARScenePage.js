@@ -1,9 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
+import { ProductContext } from './ProductContext';
 
 const ARScenePage = () => {
     const iframeRef = useRef(null);
-    const [size, setSize] = useState(100); 
+    const [size, setSize] = useState(100);
     const [color, setColor] = useState('#000000'); // Default color - black
+
+    const { product, setProduct } = useContext(ProductContext);
+    const title = product.title
+    const description = product.description
 
     const handleSizeChange = (event) => {
         const newSize = event.target.value;
@@ -18,7 +23,10 @@ const ARScenePage = () => {
     };
 
     return (
+
         <div className="flex flex-col justify-center items-center h-screen bg-gray-100 p-4">
+            <div className="text-lg font-bold">{title}</div>
+            <div className="text-md">{description}</div>
             <iframe
                 ref={iframeRef}
                 className="border-none w-full md:w-1/2 lg:h-3/4 m-0 p-0"

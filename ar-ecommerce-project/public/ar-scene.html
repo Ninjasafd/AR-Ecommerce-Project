@@ -6,19 +6,32 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/ar.js/aframe/build/aframe-ar.js"></script>
     <title>React AR App</title>
-  </head>
-  <body>
-      <!-- AR.js Scene -->
-      <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: true;'>
-          <a-marker preset="hiro">
-              <a-box position="0 0.5 0" material="color: blue;"></a-box>
-          </a-marker>
-          <a-entity camera></a-entity>
-      </a-scene>
-  
-      <!-- React Root -->
-      <div id="root"></div>
-  
-      <!-- Scripts such as React, Babel, etc. -->
-  </body>
-  </html>
+</head>
+<body>
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: true;'>
+        <a-marker preset="hiro">
+            <a-box id="dynamic-box" position="0 0.5 0" material="color: blue;"></a-box>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      window.addEventListener('message', function(event) {
+        if (event.data.type === 'CHANGE_SIZE') {
+          var box = document.getElementById('dynamic-box');
+          if (box) {
+            var scaleFactor = parseFloat(event.data.size);
+            box.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
+          }
+        } else if (event.data.type === 'CHANGE_COLOR') {
+          var box = document.getElementById('dynamic-box');
+          if (box) {
+            box.setAttribute('material', 'color', event.data.color);
+          }
+        }
+      });
+    </script>
+
+    <div id="root"></div>
+</body>
+</html>
