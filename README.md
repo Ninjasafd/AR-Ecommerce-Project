@@ -61,7 +61,7 @@ Depending on the progress of the project, a user study may be conducted to evalu
 ## Challenges
 
 ### Demo Video
-[![Demo Video](http://img.youtube.com/vi/5bS152d1niU/0.jpg
+[![Demo Video](http://img.youtube.com/vi/5bS152d1niU/169.jpg
 )](https://www.youtube.com/watch?v=5bS152d1niU)
 
 
