@@ -26,16 +26,18 @@ const LandingPage = () => {
             link: '/ar-scene'
         },
         {
-            imageSrc: 'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4425e81a-baa8-4b61-a057-45ae5c62db4c/2686d731-7c97-4966-ae36-1a27c9a0f9a8.png',
-            title: 'PLACEHOLDER',
-            description: 'This is a placeholder for a product.',
-            link: '/ar-scene'
+            imageSrc: 'https://media.istockphoto.com/vectors/black-3d-cube-vector-id513740254?k=20&m=513740254&s=612x612&w=0&h=C41qaAJ-ZtnL-OgGlF3naiwkDAx3VTUNL_GPRbR0tG4=',
+            title: 'Cube',
+            description: 'This is an example, just a cube.',
+            link: '/ar-scene',
+            shape: 'box'
         },
         {
             imageSrc: 'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4425e81a-baa8-4b61-a057-45ae5c62db4c/2686d731-7c97-4966-ae36-1a27c9a0f9a8.png',
-            title: 'PLACEHOLDER',
-            description: 'This is a placeholder for a product.',
-            link: '/ar-scene'
+            title: 'Sphere',
+            description: 'This is an example, just a sphere.',
+            link: '/ar-scene',
+            shape: 'sphere'
         },
         {
             imageSrc: 'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4425e81a-baa8-4b61-a057-45ae5c62db4c/2686d731-7c97-4966-ae36-1a27c9a0f9a8.png',
@@ -62,6 +64,7 @@ const LandingPage = () => {
                         title={product.title}
                         description={product.description}
                         link={product.link}
+                        shape={product.shape}
                     />
                 ))}
             </section>

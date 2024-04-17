@@ -1,14 +1,13 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { ProductContext } from './ProductContext';
 
 const ARScenePage = () => {
     const iframeRef = useRef(null);
-    const [size, setSize] = useState(100);
-    const [color, setColor] = useState('#000000'); // Default color - black
-
-    const { product, setProduct } = useContext(ProductContext);
-    const title = product.title
-    const description = product.description
+    const [size, setSize] = useState(Number(sessionStorage.getItem('size')) || 100);
+    const [color, setColor] = useState(sessionStorage.getItem('color') || '#000000');
+    const title = sessionStorage.getItem('title') || 'Default Title';
+    const description = sessionStorage.getItem('description') || 'Default Description';
+    const shape = sessionStorage.getItem('shape');
 
     const handleSizeChange = (event) => {
         const newSize = event.target.value;
@@ -21,6 +20,17 @@ const ARScenePage = () => {
         setColor(newColor);
         iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_COLOR', color: newColor }, '*');
     };
+
+    useEffect(() => {
+        // Changes shape of AR object
+        iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_SHAPE', shape }, '*');
+        console.log(shape)
+    });
+
+    useEffect(() => {
+        sessionStorage.setItem('size', size.toString());
+        sessionStorage.setItem('color', color);
+    }, [size, color, shape]);
 
     return (
 
