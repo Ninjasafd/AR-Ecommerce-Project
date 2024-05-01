@@ -10,7 +10,6 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     data: req.file.buffer,
     contentType: req.file.mimetype
   });
-  console.log(newFile)
   try {
     await newFile.save();
     res.status(201).send('File uploaded successfully');

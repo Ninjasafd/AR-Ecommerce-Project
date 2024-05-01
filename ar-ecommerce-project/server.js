@@ -1,14 +1,23 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const productRoutes = require('./src/routes/productRoutes');
 
+const port = process.env.BACK_ENDPORT;
 const app = express();
 // app.use(cors());
 app.use(express.json());  // Middleware to parse JSON bodies
-const port = process.env.PORT || 3000;
+app.use(cors());
+
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} Request to ${req.originalUrl}`);
+    next();
+});
+
 // Use the product routes
 app.use('/api/products', productRoutes);
+
 
 // Construct the MongoDB URI from environment variables
 const uri = `mongodb+srv://panjw:${process.env.MONGO_PASSWORD}@cluster0.08xk53a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
