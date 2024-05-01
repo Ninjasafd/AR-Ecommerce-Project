@@ -13,6 +13,7 @@ const LandingPage = () => {
             .then(response => response.json())
             .then(data => {
                 setProducts(data);
+                console.log(data)
                 setIsLoading(false); // Stop loading once data is fetched
             })
             .catch(error => {
