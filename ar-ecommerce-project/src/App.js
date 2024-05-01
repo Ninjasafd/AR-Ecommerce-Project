@@ -5,6 +5,7 @@ import ARScenePage from './components/ARScenePage';
 import NavigationBar from './components/NavigationBar';
 import About from './components/AboutPage';
 import { ProductProvider } from './components/ProductContext';
+import UploadForm from './components/UploadForm';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/ar-scene" element={<ARScenePage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/upload" element={<UploadForm />} />
         </Routes>
       </Router>
     </ProductProvider>

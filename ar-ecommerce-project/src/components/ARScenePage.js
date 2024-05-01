@@ -34,12 +34,12 @@ const ARScenePage = () => {
 
     return (
 
-        <div className="flex flex-col justify-center items-center h-screen bg-gray-100 p-4">
+        <div className="flex flex-col justify-center items-center lg:h-screen bg-gray-100 p-1">
             <div className="text-lg font-bold">{title}</div>
-            <div className="text-md">{description}</div>
+            <div className="text-md pb-2">{description}</div>
             <iframe
                 ref={iframeRef}
-                className="border-none w-full md:w-1/2 lg:h-3/4 m-0 p-0"
+                className="border-none w-3/5 md:h-3/5  m-0 p-0"
                 src="/ar-scene.html"
                 title="AR Scene"
             ></iframe>

@@ -88,3 +88,8 @@ I'll continue to update this section as I make progress.
 4. **Feedback and Improvement:** Finally, gather feedback from users and use it to improve the AR application. This involves maintenance such as fixing bugs, adding new features, or making other enhancements based on user input.
 
 Doesn't seem like I have to change the scope of the project yet, however, that may change depending on if I find a compatible markerless AR resource.
+
+# Final updates
+
+## Markerless AR
+According to [this](https://github.com/jeromeetienne/AR.js/issues/503) link, it doesn't seem like markerless AR with AR.js is possible.
