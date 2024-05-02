@@ -1,14 +1,35 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
+import TweetPopup from './TwitterPopup';
 
 const ARScenePage = () => {
     const iframeRef = useRef(null);
+    const [screenshot, setScreenshot] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
     const [size, setSize] = useState(Number(sessionStorage.getItem('size')) || 100);
     const [color, setColor] = useState(sessionStorage.getItem('color') || '#000000');
     const title = sessionStorage.getItem('title') || 'Default Title';
     const description = sessionStorage.getItem('description') || 'Default Description';
     const modelName = sessionStorage.getItem('modelName');
     const link = sessionStorage.getItem('link');
-    const [position, setPosition] = useState({ x: 0, y: 0.5, z: 0 });  // Default position
+    const [position, setPosition] = useState({ x: 0, y: 0.5, z: 0 });
+
+    useEffect(() => {
+        const handleReceiveScreenshot = (event) => {
+            if (event.data && event.data.type === 'CAPTURE_SCREENSHOT') {
+                setScreenshot(event.data.image);
+                setShowPopup(true);  
+            }
+        };
+
+        window.addEventListener('message', handleReceiveScreenshot);
+        return () => window.removeEventListener('message', handleReceiveScreenshot);
+    }, []);
+
+    const triggerScreenshot = () => {
+        if (iframeRef.current) {
+            iframeRef.current.contentWindow.postMessage({ type: 'CAPTURE_SCREENSHOT' }, '*');
+        }
+    };
 
     const handleSizeChange = (event) => {
         const newSize = event.target.value;
@@ -56,11 +77,25 @@ const ARScenePage = () => {
             </div>
             <iframe
                 ref={iframeRef}
-                className="border-none w-3/5 md:h-3/5  m-0 p-0"
+                className="border-none  w-3/5 md:h-3/5 m-0 p-0"
                 src="/ar-scene.html"
                 title="AR Scene"
                 onLoad={startup}
             ></iframe>
+            <div>
+                <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1"
+                    onClick={triggerScreenshot}
+                >
+                    Screenshot and Tweet
+                </button>
+                {showPopup &&
+                    <TweetPopup
+                        screenshot={screenshot}
+                        onClose={() => setShowPopup(false)}
+                    />
+                }
+            </div>
             <div className="my-4 w-1/4">
                 <label htmlFor="size-slider" className="block text-sm font-medium text-gray-700 ">
                     Size:
@@ -85,7 +120,7 @@ const ARScenePage = () => {
                     />
                     <span className="text-sm font-medium text-gray-700">%</span>
                 </div>
-                <label htmlFor="color-picker" className="block text-sm font-medium text-gray-700 mt-4">
+                <label htmlFor="color-picker" className="block text-sm font-medium text-gray-700 mt-3">
                     Color
                 </label>
                 <input
@@ -95,7 +130,7 @@ const ARScenePage = () => {
                     onChange={handleColorChange}
                     className="w-24 h-8 p-0 border-2 border-gray-300 cursor-pointer"
                 />
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-3 gap-6 mt-3">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">X Position:</label>
                         <input

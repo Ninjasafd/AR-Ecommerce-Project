@@ -3,12 +3,14 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path'); 
+const Twitter = require('twitter');
 const productRoutes = require('./src/routes/productRoutes');
 
 const port = process.env.BACK_ENDPORT;
 const app = express();
-app.use(express.json());  // Middleware to parse JSON bodies
+app.use(express.json({ limit: '5mb' }));  // Middleware to parse JSON bodies
 app.use(cors());
+
 
 
 app.use((req, res, next) => {

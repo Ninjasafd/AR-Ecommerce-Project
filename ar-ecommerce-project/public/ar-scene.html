@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/ar.js/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <title>React AR App</title>
 </head>
-
 <body>
-    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; trackingMethod: best;'>
+    <a-scene id="ar-content" embedded arjs='sourceType: webcam; debugUIEnabled: false; trackingMethod: best;' >
         <a-marker preset="hiro">
-            <!-- Regular shapes -->
             <a-box id="shape-box"></a-box>
             <a-sphere id="shape-sphere"></a-sphere>
-            <!-- GLTF model -->
             <a-entity id="dynamic-model"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
@@ -26,6 +23,7 @@
             var model = document.getElementById('dynamic-model');
             var box = document.getElementById('shape-box');
             var sphere = document.getElementById('shape-sphere');
+            var arContent = document.getElementById('ar-content'); // Target the AR scene specifically
 
             switch (event.data.type) {
                 case 'CHANGE_SIZE':
@@ -45,6 +43,12 @@
                         el.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
                     });
                     break;
+                case 'CAPTURE_SCREENSHOT':
+                    html2canvas(arContent).then(canvas => {  // Use the specific element for screenshot
+                        const image = canvas.toDataURL('image/png');
+                        window.parent.postMessage({ type: 'CAPTURE_SCREENSHOT', image: image }, '*');
+                    });
+                    break;
                 case 'CHANGE_MODEL':
                     model.setAttribute('visible', false);
                     box.setAttribute('visible', false);
@@ -59,10 +63,8 @@
                             break;
                         default:
                             var modelUrl = `AR_models/${event.data.modelName}`;
-                            // console.log(modelUrl)
                             model.setAttribute('gltf-model', modelUrl);
                             model.setAttribute('visible', true);
-                            // console.log(model.getAttribute('gltf-model'));
                             break;
                     }
                     break;
@@ -70,5 +72,4 @@
         });
     </script>
 </body>
-
 </html>

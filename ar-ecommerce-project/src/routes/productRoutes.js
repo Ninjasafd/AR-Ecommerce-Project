@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Twitter = require('twitter');
 const multer = require('multer');
 const upload = require('../middleware/upload');
 const Product = require('../models/Product');
@@ -54,6 +55,30 @@ router.get('/products', async (req, res) => {
         console.error('Failed to fetch products:', error);
         res.status(500).json({ message: "Error fetching products", error: error.message });
     }
+});
+
+router.post('/tweet', (req, res) => {
+    const { text } = req.body;
+
+    // Post a tweet with the provided text
+    const status = {
+        status: text
+    };
+
+    const client = new Twitter({
+        consumer_key: process.env.TWITTER_CONSUMER_KEY,
+        consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+        access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+        access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+    });
+
+    client.post('statuses/update', status, function (error, tweet, response) {
+        if (!error) {
+            res.json({ success: true, tweet });
+        } else {
+            res.status(500).json({ success: false, message: 'Failed to tweet.', error });
+        }
+    });
 });
 
 
