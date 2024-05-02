@@ -7,6 +7,7 @@ const ProductCard = ({ imageSrc, title, description, modelName, link }) => {
         sessionStorage.setItem('description', description);
         sessionStorage.setItem('modelName', modelName);
         sessionStorage.setItem('link', link);
+        sessionStorage.setItem('imageSrc', imageSrc);
     };
 
     return (

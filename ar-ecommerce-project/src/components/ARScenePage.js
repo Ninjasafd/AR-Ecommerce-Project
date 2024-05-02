@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import TweetPopup from './TwitterPopup';
 
 const ARScenePage = () => {
@@ -12,6 +12,7 @@ const ARScenePage = () => {
     const modelName = sessionStorage.getItem('modelName');
     const link = sessionStorage.getItem('link');
     const [position, setPosition] = useState({ x: 0, y: 0.5, z: 0 });
+    const imageSrc = sessionStorage.getItem('imageSrc');
 
     useEffect(() => {
         const handleReceiveScreenshot = (event) => {
@@ -93,6 +94,7 @@ const ARScenePage = () => {
                     <TweetPopup
                         screenshot={screenshot}
                         onClose={() => setShowPopup(false)}
+                        imageSrc={imageSrc}
                     />
                 }
             </div>
