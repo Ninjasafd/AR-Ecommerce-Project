@@ -1,5 +1,4 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
-import { ProductContext } from './ProductContext';
 
 const ARScenePage = () => {
     const iframeRef = useRef(null);
@@ -7,7 +6,9 @@ const ARScenePage = () => {
     const [color, setColor] = useState(sessionStorage.getItem('color') || '#000000');
     const title = sessionStorage.getItem('title') || 'Default Title';
     const description = sessionStorage.getItem('description') || 'Default Description';
-    const shape = sessionStorage.getItem('shape');
+    const modelName = sessionStorage.getItem('modelName');
+    const link = sessionStorage.getItem('link');
+    const [position, setPosition] = useState({ x: 0, y: 0.5, z: 0 });  // Default position
 
     const handleSizeChange = (event) => {
         const newSize = event.target.value;
@@ -21,27 +22,44 @@ const ARScenePage = () => {
         iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_COLOR', color: newColor }, '*');
     };
 
-    useEffect(() => {
-        // Changes shape of AR object
-        iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_SHAPE', shape }, '*');
-        console.log(shape)
-    });
+    const initializeShape = (event) => {
+        console.log(`Sending CHANGE_MODEL call ${modelName}`)
+        iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_MODEL', modelName }, '*');
+    };
+
+    const handlePositionChange = (axis, event) => {
+        const newPos = { ...position, [axis]: parseFloat(event.target.value) };
+        setPosition(newPos);
+        iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_POSITION', position: newPos }, '*');
+    };
+
+    const startup = (event) => {
+        initializeShape()
+        iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_COLOR', color: color }, '*');
+        iframeRef.current.contentWindow.postMessage({ type: 'CHANGE_SIZE', size: size / 100 }, '*');
+    }
 
     useEffect(() => {
         sessionStorage.setItem('size', size.toString());
         sessionStorage.setItem('color', color);
-    }, [size, color, shape]);
+    }, [size, color, modelName]);
 
     return (
 
         <div className="flex flex-col justify-center items-center lg:h-screen bg-gray-100 p-1">
             <div className="text-lg font-bold">{title}</div>
             <div className="text-md pb-2">{description}</div>
+            <div className="text-center mt-4">
+                <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                    Learn more about this product here!
+                </a>
+            </div>
             <iframe
                 ref={iframeRef}
                 className="border-none w-3/5 md:h-3/5  m-0 p-0"
                 src="/ar-scene.html"
                 title="AR Scene"
+                onLoad={startup}
             ></iframe>
             <div className="my-4 w-1/4">
                 <label htmlFor="size-slider" className="block text-sm font-medium text-gray-700 ">
@@ -77,6 +95,35 @@ const ARScenePage = () => {
                     onChange={handleColorChange}
                     className="w-24 h-8 p-0 border-2 border-gray-300 cursor-pointer"
                 />
+                <div className="grid grid-cols-3 gap-6">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">X Position:</label>
+                        <input
+                            type="number"
+                            value={position.x}
+                            onChange={(e) => handlePositionChange('x', e)}
+                            className="mt-1 block w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Y Position:</label>
+                        <input
+                            type="number"
+                            value={position.y}
+                            onChange={(e) => handlePositionChange('y', e)}
+                            className="mt-1 block w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Z Position:</label>
+                        <input
+                            type="number"
+                            value={position.z}
+                            onChange={(e) => handlePositionChange('z', e)}
+                            className="mt-1 block w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );

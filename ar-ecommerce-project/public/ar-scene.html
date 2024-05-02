@@ -10,45 +10,65 @@
 </head>
 
 <body>
-    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;color: blue;'>
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; trackingMethod: best;'>
         <a-marker preset="hiro">
-            <!-- <a-box id="dynamic-box" position="0 0.5 0" material="color: black;"></a-box> -->
-            <a-entity id="dynamic-shape"></a-entity>
+            <!-- Regular shapes -->
+            <a-box id="shape-box"></a-box>
+            <a-sphere id="shape-sphere"></a-sphere>
+            <!-- GLTF model -->
+            <a-entity id="dynamic-model"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
         window.addEventListener('message', function (event) {
-            if (event.data.type === 'CHANGE_SIZE') {
-                var shape = document.getElementById('dynamic-shape');
-                if (shape) {
+            var model = document.getElementById('dynamic-model');
+            var box = document.getElementById('shape-box');
+            var sphere = document.getElementById('shape-sphere');
+
+            switch (event.data.type) {
+                case 'CHANGE_SIZE':
                     var scaleFactor = parseFloat(event.data.size);
-                    shape.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
-                }
-            } else if (event.data.type === 'CHANGE_COLOR') {
-                var shape = document.getElementById('dynamic-shape');
-                if (shape) {
-                    shape.setAttribute('material', 'color', event.data.color);
-                }
-            } else if (event.data.type === 'CHANGE_SHAPE') {
-                var shape = document.getElementById('dynamic-shape');
-                if (shape) {
-                    switch (event.data.shape) {
+                    [model, box, sphere].forEach(el => {
+                        el.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
+                    });
+                    break;
+                case 'CHANGE_COLOR':
+                    [box, sphere].forEach(el => {
+                        el.setAttribute('material', 'color', event.data.color);
+                    });
+                    break;
+                case 'CHANGE_POSITION':
+                    var pos = event.data.position;
+                    [model, box, sphere].forEach(el => {
+                        el.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+                    });
+                    break;
+                case 'CHANGE_MODEL':
+                    model.setAttribute('visible', false);
+                    box.setAttribute('visible', false);
+                    sphere.setAttribute('visible', false);
+
+                    switch (event.data.modelName) {
                         case 'box':
-                            shape.setAttribute('geometry', 'primitive: box');
+                            box.setAttribute('visible', true);
                             break;
                         case 'sphere':
-                            shape.setAttribute('geometry', 'primitive: sphere');
+                            sphere.setAttribute('visible', true);
+                            break;
+                        default:
+                            var modelUrl = `AR_models/${event.data.modelName}`;
+                            // console.log(modelUrl)
+                            model.setAttribute('gltf-model', modelUrl);
+                            model.setAttribute('visible', true);
+                            // console.log(model.getAttribute('gltf-model'));
                             break;
                     }
-                }
+                    break;
             }
         });
     </script>
-
-
-    <div id="root"></div>
 </body>
 
 </html>

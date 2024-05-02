@@ -9,9 +9,6 @@ router.post('/add-product', upload.fields([{ name: 'imageSrc' }, { name: 'model'
     if (!req.files['imageSrc'] || !req.files['imageSrc'][0]) {
         return res.status(400).json({ message: 'Image source file is required' });
     }
-    if (!req.files['model'] || !req.files['model'][0]) {
-        return res.status(400).json({ message: 'Model file is required' });
-    }
 
     try {
         const newProduct = new Product({
@@ -22,10 +19,7 @@ router.post('/add-product', upload.fields([{ name: 'imageSrc' }, { name: 'model'
                 data: req.files['imageSrc'][0].buffer,
                 contentType: req.files['imageSrc'][0].mimetype
             },
-            model: {
-                data: req.files['model'][0].buffer,
-                contentType: req.files['model'][0].mimetype
-            }
+            model: req.body.model
         });
 
         await newProduct.save();
@@ -43,16 +37,15 @@ router.get('/products', async (req, res) => {
         const products = await Product.find({});
 
         const formattedProducts = products.map(product => {
+            let imageData = null;
+
             if (product.imageSrc && product.imageSrc.data && product.imageSrc.contentType) {
                 imageData = `data:${product.imageSrc.contentType};base64,${product.imageSrc.data.toString('base64')}`;
             }
-            if (product.model && product.model.data && product.model.contentType) {
-                model = `data:${product.model.contentType};base64,${product.model.data.toString('base64')}`;
-            }
+
             return {
                 ...product.toObject(),
-                imageSrc: imageData,
-                model: model
+                imageSrc: imageData
             };
         });
 

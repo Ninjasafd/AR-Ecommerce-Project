@@ -48,14 +48,14 @@ const LandingPage = () => {
                         <span className="text-lg font-medium">Loading...</span>
                     </div>
                 ) : (
-                    products.map((product, index) => (
+                    products.map((product) => (
                         <ProductCard
                             key={product._id}
                             imageSrc={product.imageSrc}
                             title={product.title}
                             description={product.description}
                             link={product.link}
-                            shape={product.shape}
+                            modelName={product.model}
                         />
                     ))
                 )}

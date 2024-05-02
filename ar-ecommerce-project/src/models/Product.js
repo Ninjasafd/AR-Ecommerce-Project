@@ -8,10 +8,7 @@ const productSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
-  model: {
-    data: Buffer,
-    contentType: String
-  }
+  model: { type: String, required: true }
 });
 
 module.exports = mongoose.model('Product', productSchema);

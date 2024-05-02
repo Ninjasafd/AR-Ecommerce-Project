@@ -2,18 +2,23 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path'); 
 const productRoutes = require('./src/routes/productRoutes');
 
 const port = process.env.BACK_ENDPORT;
 const app = express();
-// app.use(cors());
 app.use(express.json());  // Middleware to parse JSON bodies
 app.use(cors());
+
 
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} Request to ${req.originalUrl}`);
     next();
 });
+
+const modelsPath = path.join(__dirname, 'public', 'AR_models');  // Adjust this path if necessary
+app.use('/models', express.static(modelsPath));
+console.log(`Serving models from: ${modelsPath}`);
 
 // Use the product routes
 app.use('/api/products', productRoutes);
